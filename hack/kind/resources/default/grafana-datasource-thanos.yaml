@@ -3,6 +3,7 @@ kind: GrafanaDatasource
 metadata:
   name: thanos
 spec:
+  allowCrossNamespaceImport: true
   datasource:
     access: proxy
     basicAuth: false

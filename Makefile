@@ -286,7 +286,9 @@ ko-build-local: $(KO) ## Build Docker image with KO
 .PHONY: ko-build-kind
 ko-build-kind: $(KIND) ko-build-local ## Build and Load Docker image into kind cluster
 	$(info $(M) running $@)
-	$(KIND) load docker-image $(KO_DOCKER_REPO) --name $(KIND_CLUSTER_NAME)
+	@# Tag ko.local:latest as the full path expected by kustomize
+	docker tag ko.local:latest $(KO_DOCKER_REPO):latest || true
+	$(KIND) load docker-image $(KO_DOCKER_REPO):latest --name $(KIND_CLUSTER_NAME)
 
 BUNDLE_IMG ?= $(REGISTRY)/$(ORG)/grafana-operator-bundle:v$(VERSION)
 

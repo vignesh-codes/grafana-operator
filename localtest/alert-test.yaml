@@ -1,0 +1,30 @@
+apiVersion: grafana.integreatly.org/v1beta1
+kind: GrafanaAlertRuleGroup
+metadata:
+  name: test-alert-group
+  namespace: default
+spec:
+  folderRef: "my-folder"
+  instanceSelector:
+    matchLabels:
+      dashboards: grafana
+  interval: 60s
+  rules:
+    - uid: test-alert-1
+      title: Test Alert
+      condition: A
+      data:
+        - refId: A
+          datasourceUid: __expr__
+          model:
+            expression: 1
+            intervalMs: 1000
+            maxDataPoints: 43200
+            refId: A
+      execErrState: Error
+      for: 1w
+      noDataState: NoData
+      isPaused: false
+      labels: {}
+
+

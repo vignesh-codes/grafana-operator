@@ -2,21 +2,11 @@ apiVersion: grafana.integreatly.org/v1beta1
 kind: Grafana
 metadata:
   name: grafana
+  namespace: default
   labels:
-    dashboards: "grafana"
+    dashboards: grafana
 spec:
-  client:
-    preferIngress: false
-  config:
-    log:
-      mode: "console"
-    feature_toggles:
-      enable: nestedFolders
-    auth:
-      disable_login_form: "false"
-    security:
-      admin_user: root
-      admin_password: secret
+  version: 12.1.0
   ingress:
     spec:
       ingressClassName: nginx
@@ -24,10 +14,18 @@ spec:
         - host: grafana.127.0.0.1.nip.io
           http:
             paths:
-              - backend:
+              - path: /
+                pathType: Prefix
+                backend:
                   service:
                     name: grafana-service
                     port:
                       number: 3000
-                path: /
-                pathType: Prefix
+  config:
+    security:
+      admin_user: root
+      admin_password: secret
+    # auth:
+    #   disable_login_form: false
+  client:
+    preferIngress: false

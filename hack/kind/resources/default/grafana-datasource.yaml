@@ -3,6 +3,7 @@ kind: GrafanaDatasource
 metadata:
   name: example-grafanadatasource
 spec:
+  allowCrossNamespaceImport: true
   datasource:
     access: proxy
     type: prometheus

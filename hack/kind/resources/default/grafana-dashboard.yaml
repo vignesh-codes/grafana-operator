@@ -5,6 +5,7 @@ metadata:
   labels:
     dashboards: "grafana"
 spec:
+  allowCrossNamespaceImport: true
   folder: my-folder-name
   instanceSelector:
     matchLabels:

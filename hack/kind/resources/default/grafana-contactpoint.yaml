@@ -9,6 +9,7 @@ metadata:
     app.kubernetes.io/created-by: grafana-operator
   name: grafanacontactpoint-sample
 spec:
+  allowCrossNamespaceImport: true
   name: grafanacontactpoint-sample
   type: "email"
   instanceSelector:
